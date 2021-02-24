@@ -1,27 +1,51 @@
 <!DOCTYPE html>
+
+<style>
+
+body {
+  background-color: white;
+}
+
+
+.paragraph {
+  color: darkslategray;
+  font-family: "Lucida Console", "Courier New", monospace;
+
+}
+
+#myHeader {
+  text-align: center;
+  color:#37a9ad
+}
+
+</style>
+
 <body>
-  <h1 style="color:#37a9ad">Weekly Assignment 3</h1>
 
-  <img src="https://styles.redditmedia.com/t5_2th52/styles/communityIcon_b37n2zfs8k861.png?width=256&s=a9cb63319055ded916e5b12ff03f1e8c63ae6911" alt="WallStreetBets Subreddit Picture">
 
-  <p>Recently, there has been a lot of controversy over shares in a few specific stocks. The issue involved <a href="https://robinhood.com/us/en/">Robinhood</a>, an app that allows users to share and trade stock for free. While the “free” part itself is debatable, the issue at hand is far worse. On ___, Robinhood made trading stocks like AMC and Gamestop impossible, at least to buy. While this action was made under the pretense that Robinhood was worried for its security (i.e. safe stock trades), others believe that Robinhood may be acting in the interest of the hedge funds that are suffering from the high volatility of these stocks. Because “traditional analysts” made claims that some stocks were “clunkers”, users on the subreddit <a href="https://www.reddit.com/r/wallstreetbets/">WallStreetBets</a> came together to raise the prices of the stocks claimed to fail. This forced hedge funds that had already made decisions to sell the stock to re-buy into the stock, causing them massive losses. As a result, Robinhood’s move to stop allowing users to buy the stock upset the market and many people. Although Robinhood is within its legal limits to stop the transaction of certain stocks, their decision isn’t right to do so. However, it may be their only option.
+  <h1 id="myHeader">Weekly Assignment 4</h1>
+
+
+
+  <p class = "paragraph">There are a lot of attractive qualities about people. When it comes to what people look for in others, it comes down to personal preference. One of these, especially for women, is height. When it comes to height, men and women usually tend to be pretty specific. Using data from the Bachelor and Bachelorette (<a href="https://github.com/fivethirtyeight/data/tree/master/bachelorette">Github</a> and <a href="https://www.imdb.com/name/nm1325125/">imdb</a>), we are able to see some trends in data, specifically that the variance for height in men is much tighter than that of women, as well as having a high average for height for both men and women as compared to the national average.
   </p>
 
-  <p>I will cover two main points:
+  <p class = "paragraph">When looking at the men on the Bachelor, right away, we can see that all of the men are really, really tall. <a href="https://www.cdc.gov/nchs/data/nhsr/nhsr122-508.pdf">According to the CDC</a>, Men age 20 and up are, on average, 5 feet and 9 inches. Looking at the men on screen, we see most of them are much taller, with a man standing 5 feet and 9 inches actually being “shortest Bachelor to ever appear on the show” (<a href="https://screenrant.com/the-bachelor-men-ranked-by-height/">ScreenRant</a>). Looking at the diagram stated below, we can see some of the heights of the winners of the Bachelorette. Seven out of the Nine men depicted show that, although it has been converted into only inches, are above 6 feet tall. Looking at the average height between these men, we see that the average height is just over 6 feet and ½ an inch, this is much bigger than the average height of a normal man. Because most of the men picked on bachelorette are picked because of how attractive they are, this goes to show some of women’s beauty standards.
   </p>
 
-  <ul>
-    <li> Robinhood's Security
-    <li> Collateral and the DTCC
-  </ul>
+  <img src="https://drive.google.com/file/d/1l10h-jxhHzPT1J1yH8ehP7LGX9-cIf2T/view?usp=sharing" alt="Chart of Bachelorette Winner's Heights">
 
-  <p>My first thought as an information scientist is that this is very unusual for the stock market. From a data standpoint, independent investors often are not equipped with the same knowledge and tools that a lot of institutional investors have. Institutional investors use their fiscal expertise to make predictions on stocks, which will succeed and which will fail, while using algorithms to quantify and calculate the exact numbers. Ironically, this specific situation is a lot like the actual Robinhood, where people without these tools are getting a chance at earning real money. It’s anybody's guess for how long these stocks will stay inflated, but it’s definitely putting the pressure on.
+  <p class = "paragraph">In addition to the mean of the Bachelorette winners being higher than the national average man, the variance within the group is pretty stable. Men who won the bachelorette are consistently close to the average, as compared to the graph of the women below. This is an interesting finding, because it may suggest that women consistently like men who are taller than the national average as compared to men, who probably do not care as much. However, making a full claim without looking at other possible variables wouldn’t make sense, so it could be a result of something else. Still interesting to speculate about though.
   </p>
 
-  <p>In terms of security, I think there may be a small concern for Robinhood. While it is their fault for not having enough servers to be able to trade, there is definitely some validity to trying to protect the security of the trades. In addition to this, E-traders like Robinhood have to meet the many regulations on trading that every other Institutional Trader has to meet.  The DTCC, one of the many stages of stock trading, has a fee for trading called collateral, that is there to reduce the risk of a bad trade. All of this came into play when looking at the Robinhood situation.
+  <img src="https://drive.google.com/file/d/1euuYnE5FQ1AKuLahnef9DvBNs2DcWpfl/view?usp=sharing" alt="Chart of Bachelor Winner's Heights">
+
+  <p class = "paragraph">Finally, we look at the women of the Bachelor. We see that in this show, not only is there a pretty large difference between each individual, but also that the difference between the average woman’s height on the bachelor and the national average isn’t that large. Coming in close to 5 feet and 6 inches, the women on the Bachelor, on average, are not much taller than the national average for women, 5 feet and 4 inches.
   </p>
 
-  <p>“And those are the reasons the DTCC asked brokers for more collateral for each such trade. The clearing house didn’t want to be caught with brokers not having the funds they needed to settle. Therefore, Robinhood and others restricted buying on these highflying stocks until it could come up with enough cash to pay collateral. Robinhood allowed users to sell the stocks because the selling broker puts up the shares as collateral, not cash.” (<a href="https://www.barrons.com/articles/philip-morris-climbs-on-earnings-cfo-cites-transformation-51612467125">Barrons, Why Did Robinhood Stop GameStop Trading? Everything to Know.</a>)</p>
-  <p>Once again, from a data standpoint, the complicated algorithm that the DTCC uses to ensure that it is safe as the middleman adds a lot of data friction. This is slowing down the process of the inflation of trading. While it may not be right, it honestly seems that this is the only thing they can do, until they make up the money.</p>
+  <p class = "paragraph">All in all, the data on the Bachelor and Bachelorette help give insight on the preferences of some men and women, as illustrated by the media. Because both of these are television shows, it makes sense to find people that the audience finds attractive. Although this gives some insight on the preferences of men and women, there are several different ways to improve on this study. First and foremost, getting more data about the winners could be useful. Admittedly, the data was limited as some of the heights for the winners were not displayed, so this may have affected the accuracy of the showings. This resulted in dropping the seasons where there wasn’t any data. Further, this allowed one of the seasons to be mismatched, as Bachelor Season 11 and Bachelorette Season 14 had no data on their winner’s height. A better study would have included all of the data of not only the winners of each season, but also every contestant that has played so far. In addition, using more complex statistical tools, like an Analysis of Variance and t tests, to have a better understanding of the data would likely be helpful.
+  </p>
+
+
 
 </body>
