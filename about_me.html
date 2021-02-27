@@ -19,7 +19,7 @@
   }
 }
 
-/* simple formating */
+/* Simple Formating */
 
 html {
   box-sizing: border-box;
@@ -38,8 +38,19 @@ body {
 
 /* SVG STUFF */
 
+p.excerpt {
+  text-align: center;
+  left: 39%;
+  color: white;
+  font-size: 25px;
+}
+
 .wave-container {
   opacity: 1;
+}
+
+li {
+  color: white;
 }
 
 .wave-container > svg {
@@ -52,9 +63,15 @@ body {
 /* Header */
 
 #myHeader {
+  left: 31%;
+  top: 100px;
+  position: fixed;
   text-align: center;
-  color:#ffffff
+  color:#ffffff;
+  font-size: 100px;
 }
+
+/* Links to other websites */
 
 div.linkbar {
   position: fixed;
@@ -65,10 +82,34 @@ div.linkbar {
 
 div.linkbox {
   background-color: white;
+  cursor: pointer;
   height: 80px;
   width: 80px;
   border: 3px outset gray;
 }
+
+/*
+
+These are all images I may use as Icons eventually
+
+
+div.linkbox.1 {
+  background-image: url("h0me.png");
+}
+
+div.linkbox.2 {
+  background-image: url("about.png");
+}
+
+div.linkbox.3 {
+  background-image: url("port.png");
+}
+
+div.linkbox.4 {
+  background-image: url("contact.png");
+}
+
+*/
 
 div.textlink {
   text-align: center;
@@ -76,6 +117,29 @@ div.textlink {
 
 div.linkbox:hover {
   background-color: lightgray;
+}
+
+div.experienceFrame {
+  display: inline-block;
+  width: 93.5%;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-right: 50px;
+  margin-left: 50px;
+  bottom: 425px;
+  height: 425px;
+  background-color: #e7c496;
+}
+
+div.experienceBox {
+  text-align:center;
+  display: inline-block;
+  background-color: #e1bf92;
+  width: 25%;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-right: 50px;
+  margin-left: 50px;
 }
 
 </style>
@@ -89,28 +153,89 @@ div.linkbox:hover {
 
 <body>
 
-  <div class="wave-container">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-      <path fill="#f3f4f5" fill-opacity="1" d="M0,128L48,133.3C96,139,192,149,288,144C384,139,480,117,576,117.3C672,117,768,139,864,133.3C960,128,1056,96,1152,74.7C1248,53,1344,43,1392,37.3L1440,32L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
-    </svg>
-  </div>
+  <div>
+    <div class="wave-container">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <path fill="#f3f4f5" fill-opacity="1" d="M0,128L48,133.3C96,139,192,149,288,144C384,139,480,117,576,117.3C672,117,768,139,864,133.3C960,128,1056,96,1152,74.7C1248,53,1344,43,1392,37.3L1440,32L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+      </svg>
+    </div>
 
-  <div class="linkbar">
-    <div class = "linkbox">
-      <a>
+    <div class="linkbar">
+        <div class = "linkbox" onclick="myFunction1()">
+          <p>Home</p>
+        </div>
+        <div class = "linkbox" onclick="myFunction2()">
+          <p>About</p>
+        </div>
+        <div class = "linkbox" onclick="myFunction3()">
+          <p>Portfolio</p>
+        </div>
+        <div class = "linkbox" onclick="myFunction4()">
+          <p>Contact</p>
+        </div>
+      </div>
     </div>
-    <div class = "linkbox">
-      <a>
-    </div>
-    <div class = "linkbox">
-      <a>
-    </div>
-    <div class = "linkbox">
-      <a>
-    </div>
-  </div>
 
-  <h1 id="myHeader">Welcome!</h1>
+<p>(Not experience relevant to coding, but just a template for when I do. These are the jobs I've worked.)
+    <div class="experienceFrame">
+      <div class="experienceBox">
+
+        <p class="excerpt">Barista, Host</p>
+        <ul>
+          <li>Hermosa Beach, California
+          <li>Martha’s Grill 22nd Street/ Apr 2017 to Current
+          <li>Made all of the drinks for the restaurant including coffee beverages, smoothies and shakes
+          <li>Communicated with other employees about patron placement and orders
+        <ul>
+
+      </div>
+
+      <div class="experienceBox">
+
+        <p class="excerpt">Cash Register</p>
+        <ul>
+          <li>Boulder, Colorado
+          <li>Kittredge Market/ Feb 2020 to March 2020
+          <li>Operated a Cash Register
+          <li>Took Inventory
+          <li>Prepared Food
+        <ul>
+
+      </div>
+
+      <div class="experienceBox">
+
+        <p class="excerpt">Cleaning Crew</p>
+        <ul>
+          <li>Manhattan Beach, California
+          <li>Vons/ Apr 2020 to July 2020
+          <li>Trained to Sanitize due to COVID-19
+          <li>Courtesy Clerk, helped bag groceries
+          <li>Operated the Alcohol Department
+        <ul>
+
+      </div>
+
+    </div>
+
+  <h1 id="myHeader">My Experience</h1>
+
+
+
+<script>
+function myFunction1() {
+  location.assign("https://trevorw-code.github.io/homepage")
+}
+function myFunction2() {
+  location.assign("https://trevorw-code.github.io/about_me")
+}
+function myFunction3() {
+  location.assign("https://trevorw-code.github.io/portfolio_")
+}
+function myFunction4() {
+  location.assign("https://trevorw-code.github.io/contact")
+}
+</script>
 
 </body>
 </html>
