@@ -1,116 +1,116 @@
-
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<style>
+  <head>
+     <title>Portfolio • Trevor Ward</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
 
-
-/* water animation */
-
-@keyframes animateWave {
-  0% {
-    transform: scale(1,0);
-  }
-  50% {
-    transform: scale(1,1);
-  }
-  100% {
-    transform: scale(1,0);
-  }
-}
-
-/* simple formating */
-
-html {
-  box-sizing: border-box;
-}
-
-*,*::before,*::after {
-  box-sizing: inherit;
-}
-
-/* background and general formatting */
 
 body {
-  margin: 0;
-  background-color: #eccca2;
+  position: relative;
 }
+    </style>
+  </head>
+  <body data-spy="scroll" data-target="#myScrollspy">
 
-/* SVG STUFF */
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Trevor Ward</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="https://trevorw-code.github.io/homepage">Home<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://trevorw-code.github.io/about_me">Resume</a>
+          </li>
+          <li class="nav-item dropdown active">
+            <a class="nav-link dropdown-toggle" href="https://trevorw-code.github.io/portfolio_" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Portfolio
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#Life Expectancy Linear Regression">Life Expectancy Linear Regression</a>
+              <a class="dropdown-item" href="#Quantum Computing Podcast">Quantum Computing Podcast</a>
+            </div>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="https://trevorw-code.github.io/contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
-.wave-container {
-  opacity: 1;
-}
+    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+      <div class="col-md-5 p-lg-5 mx-auto my-5">
+        <div class="col-sm-60">
+             <div id="Life Expectancy Linear Regression">
+               <h1>Life Expectancy Linear Regression</h1>
+               <div class="d-flex justify-content-center">
+                   <ul class="nav nav-tabs" id="myTab" role="tablist">
+                     <li class="nav-item" role="presentation">
+                       <button type="button" class="btn btn-light" type="button" class="btn btn-primary" class="nav-link" href="#Project Summary" data-toggle="tab" >Project Summary</button>
+                     </li>
+                     <li>
+                       <button type="button" class="btn btn-light" class="nav-link" href="#Pictures" data-toggle="tab">Pictures</button>
+                     </li>
+                   </ul>
+                 </div>
+                   <div class="tab-content">
+                     <div id="Project Summary" class="tab-pane">
+                       <h3>Aggregating Real Data</h3>
+                       <p class="d-inline-flex p-2">The data used in this project was collected by WHO, or the World Health Organization. It is pretty similar to the data we used in class, where the dependent variable is life expectancy and the independent variables are a range of different factors. The data in this project attempts to find the linear regression of life expectancy, where all of the factors are seperated by different countries. In this particular study, WHO aimed to find how disease and illness effected lifestyle, in conjunction to eating habits, drug use, and fiscal properties of the country. For my project, I was interested in seeing which illnesses had a large effect on the life expectancy, and how much of an effect they actully did have. 151 countries were analyzed in this dataset, and 9 different independent variables were compared to the single dependent variable. Only one of these variables had to be coded, which was "Status", or an indicator of whether a country was "developed" or "developing". There were other strange variables as well. Some things were counted "per 1000", such as "Infant Deaths per 1000 population", "(Measles) number of reported cases per 1000 population", and "Deaths per 1 000 live births HIV/AIDS". Other variables were counted in percentage, like "Polio (Pol3) immunization coverage among 1-year-olds (%), "Diphtheria tetanus toxoid and pertussis (DTP3) immunization coverage among 1-year-olds (%)" and "Prevalence of thinness among children and adolescents for Age 10 to 19 (% )". GDP was calculated per capita. The most confusing variable of all was "Human Development Index in terms of income composition of resources (index ranging from 0 to 1)". This number wasn't clearly defined, but we will get to that later.</p>
+                     </div>
+                     <div id="Pictures" class="tab-pane">
+                       <h3>Pictures</h3>
+                       <img src="data1.png" class="img-fluid" alt="Responsive image">
+                       <img src="data2.png" class="img-fluid" alt="Responsive image">
+                       <img src="data3.png" class="img-fluid" alt="Responsive image">
+                     </div>
+                   </div>
+             </div>
+             <div id="Quantum Computing Podcast">
+               <h1>Quantum Computing Podcast</h1>
+               <div class="d-flex justify-content-center">
+                   <ul class="nav nav-tabs" id="myTab" role="tablist">
+                     <li class="nav-item" role="presentation">
+                       <button type="button" class="btn btn-light" type="button" class="nav-link" href="#Project Summary2" data-toggle="tab" >Project Summary</button>
+                     </li>
+                     <li>
+                       <button type="button" class="btn btn-light" class="nav-link" href="#Pictures2" data-toggle="tab">Pictures</button>
+                     </li>
+                     <li>
+                       <button type="button" class="btn btn-light" class="nav-link" href="#Listen" data-toggle="tab">Listen</button>
+                     </li>
+                   </ul>
+                 </div>
+                   <div class="tab-content">
+                     <div id="Project Summary2" class="tab-pane">
+                       <h3>Qubits and More</h3>
+                       <p>This Podcast, featuring Jon Ward, Vice President of Marketing at Sidecar Health and Kevin O'Reilly, Vice President of Marketing Sciences at TWO NIL, explores the possibility of AI and it's uses in the corporate world.</p>
+                     </div>
+                     <div id="Pictures2" class="tab-pane">
+                       <h3>Pictures</h3>
+                       <img src="jon.png" class="img-fluid" alt="Responsive image">
+                       <img src="kevin.png" class="img-fluid" alt="Responsive image">
+                     </div>
+                     <div id="Listen" class="tab-pane">
+                       <h3>Link</h3>
+                       <audio controls>
+                         <source src="quantumPod.mp3" />
+</                     </audio>
+                     </div>
+                   </div>
 
-.wave-container > svg {
-  display: block;
-  transform-origin: top;
-  animation: animateWave 8000ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
-  animation-iteration-count: infinite;
-}
-
-/* Header */
-
-#myHeader {
-  text-align: center;
-  color:#ffffff
-}
-
-div.linkbar {
-  position: fixed;
-  width: 80px;
-  height: 320px;
-  top: 0px;
-}
-
-div.linkbox {
-  background-color: white;
-  height: 80px;
-  width: 80px;
-  border: 3px outset gray;
-}
-
-div.textlink {
-  text-align: center;
-}
-
-div.linkbox:hover {
-  background-color: lightgray;
-}
-
-</style>
-
-<head>
-  <meta name="description" content="Webpage description goes here" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HomePage</title>
-</head>
-</head>
-
-<body>
-
-  <div class="wave-container">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-      <path fill="#f3f4f5" fill-opacity="1" d="M0,128L48,133.3C96,139,192,149,288,144C384,139,480,117,576,117.3C672,117,768,139,864,133.3C960,128,1056,96,1152,74.7C1248,53,1344,43,1392,37.3L1440,32L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
-    </svg>
-  </div>
-
-  <div class="linkbar">
-    <div class = "linkbox">
-      <a>
+            </div>
+        </div>
+      </div>
     </div>
-    <div class = "linkbox">
-      <a>
-    </div>
-    <div class = "linkbox">
-      <a>
-    </div>
-    <div class = "linkbox">
-      <a>
-    </div>
-  </div>
 
-  <h1 id="myHeader">Welcome!</h1>
 
-</body>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
 </html>
