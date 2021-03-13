@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+  <link  rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Version3</title>
+</head>
+<body>
+  <div class="container">
+    <canvas id="myChart"></canvas>
+  </div>
+  <button onclick="pieChart()">Pie Chart</button>
+  <p>In this last version, I added some Java functionality. The two things that you may notice are the 1) black borders when you hover over the bars and 2) how you can change the chart format to a pie chart. I think that the functionality of the borders just further emphasizes what you are looking at, and using visual ques, seperates it from the rest of the group, while the pie chart button just allows people to see the chart in a different form, giving different perspective.</p>
+  <button href="">Version 1</button>
+
+  <script>
+    let myChart = document.getElementById("myChart").getContext('2d');
+
+        // Global Settings
+        Chart.defaults.global.defaultFontSize = 18;
+        Chart.defaults.global.defaultFontColor = '#777';
+
+    let someChart = new Chart(myChart, {
+      type: 'bar', // do I want another kind of chart?
+      data: {
+        labels:['Fort Collins','Boulder','Longmont'],
+        datasets:[{
+          label:'Population',
+          data:[
+            165609,
+            106392,
+            94445
+          ],
+          backgroundColor:[
+            '#C0C0C0',
+            '#CFB87C',
+            '#C0C0C0'
+          ],
+          hoverBorderWidth:2,
+          hoverBorderColor:'black'
+        }]
+      },
+      options:{}
+    });
+
+    function pieChart() {
+      someChart.destroy();
+      let myChart = document.getElementById("myChart").getContext('2d');
+      let some2Chart = new Chart(myChart, {
+        type: 'pie', // do I want another kind of chart?
+        data: {
+          labels:['Fort Collins','Boulder','Longmont'],
+          datasets:[{
+            label:'Population',
+            data:[
+              165609,
+              106392,
+              94445
+            ],
+            backgroundColor:[
+              '#C0C0C0',
+              '#CFB87C',
+              '#C0C0C0'
+            ],
+            hoverBorderWidth:2,
+            hoverBorderColor:'black'
+          }]
+        },
+        options:{}
+      });
+    }
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+  <link  rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Version2</title>
+</head>
+<body>
+  <div class="container">
+    <canvas id="myChart"></canvas>
+  </div>
+  <p>In this version, I tried to change the colors, so you can see what the population of our city is, as compared to other nearby cities. In addition, I changed some global settings like Font Size and Color.</p>
+  <button href="">Version 3</button>
+
+  <script>
+    let myChart = document.getElementById("myChart").getContext('2d');
+
+    // Global Settings
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = '#777';
+
+    let someChart = new Chart(myChart, {
+      type: 'bar', // do I want another kind of chart?
+      data: {
+        labels:['Fort Collins','Boulder','Longmont'],
+        datasets:[{
+          label:'Population',
+          data:[
+            165609,
+            106392,
+            94445
+          ],
+          backgroundColor:[
+            '#C0C0C0',
+            '#CFB87C',
+            '#C0C0C0'
+          ]
+        }]
+      },
+      options:{}
+    });
+  </script>
+</body>
+</html>
