@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Week 12 Slides</title>
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/reset.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/reveal.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/theme/moon.min.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/plugin/highlight/monokai.min.css" id="highlight-theme">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h3>Assignment 10: Reveal.js Slideshow</h3>
+					<p style="color:#CFB87C; font-weight:bold;">Trevor Ward</p>
+					<p style="color:#565A5C">A presentation about simple CSS changes</h5>
+				</section>
+
+
+
+				<section>
+					<h3>Does this Sound like you?</h3>
+						<p class="fragment fade-in-then-semi-out">"Ugh, this slideshow is so boring"</p>
+						<p class="fragment fade-in-then-semi-out">"Why do people still use the basic template for slideshows"</p>
+						<p class="fragment fade-in-then-semi-out">"I really can't wait for this to be over"</p>
+						<h5 class="fragment">If yes, then we can help!</h5>
+				</section>
+
+				<section data-background-color="#4085c9">
+					<img class="r-stretch" src="cloud.png">
+					<h3>Introducing Backgrounds!</h3>
+					<ul>
+						<li style="color:#ffffff">changing the background color gives character to the slideshows!
+						<li style="color:#ffffff">it essentially forces people to watch the slide even closer than before
+				</section>
+
+
+				<section>
+					<section>
+						<h3>Imagine this is a page...</h3>
+						<p>(imagine the parenthesis are < or >)</p>
+						<pre><code class="html" data-trim data-line-numbers=1>
+							(section)
+								(p)Sample Text(/p)
+								(p)Sample Text(/p)
+						</code></pre>
+					</section>
+
+					<section data-background-color="#ff594a">
+						<h3>Adding just this much changes the page!</h3>
+						<pre><code class="html" data-trim data-line-numbers=1>
+							(section data-background-color="#ff594a")
+								(p)Sample Text(/p)
+								(p)Sample Text(/p)
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<h3>Look at the Documentation for more info!</h3>
+					<ul>
+						<li>General <a href="https://revealjs.com/">Documentation</a>
+						<li><a href="https://revealjs.com/backgrounds/">Backgrounds</a>
+					</ul>
+				</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			</div>
+		</div>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/reveal.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/plugin/notes/notes.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/plugin/highlight/highlight.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/plugin/math/math.min.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				slideNumber: 'h/v',
+				math: {
+				      mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
+				      config: 'TeX-AMS_HTML-full',
+				      // pass other options into `MathJax.Hub.Config()`
+				      TeX: { Macros: { RR: "{\\bf R}" } }
+				    },
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealHighlight, RevealNotes, RevealMath ]
+			});
+		</script>
+	</body>
+</html>
