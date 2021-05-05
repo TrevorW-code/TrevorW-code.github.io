@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Trevor's Assignment 11</title>
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/reset.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/reveal.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/theme/moon.min.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/plugin/highlight/monokai.min.css" id="highlight-theme">
+
+		<!-- Loading Vega-->
+		<script src="https://cdn.jsdelivr.net/npm/vega@5.19.1"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vega-lite@5.0.0"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.15.1"></script>
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+        <!-- TITLE SLIDE -->
+
+      	<section>
+					<h2>Assignment 11: Integrating Vega</h3>
+					<p style="color:#CFB87C; font-weight:bold;">Trevor Ward</p>
+					<p style="color:#565A5C">May 4th, 2021</p>
+				</section>
+
+        <!-- First Vega Illustration -->
+
+				<section>
+					<section>
+						<h2>First Basic Vega Illustration</h2>
+						<p>Using the "<a href="https://cdn.jsdelivr.net/npm/vega-datasets@2.2.0/data/cars.json" target="_blank" rel="noopener noreferrer">cars.json</a>" data, I wanted to see how Horsepower affected Acceleration</p>
+						<ul>
+							<li>x-axis: "Horsepower"</li>
+							<li>y-axis: "Acceleration"</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Embeded Vega</h2>
+						<div id="vis-area"></div>
+						<script type="text/javascript">
+						var spec = {
+							"width": 600,
+							"height": 400,
+              "data": {
+                  "url": "https://cdn.jsdelivr.net/npm/vega-datasets@2.2.0/data/cars.json"
+                },
+                "mark": "point",
+                "encoding": {
+                  "x": {"field": "Horsepower", "type": "quantitative"},
+                  "y": {"field": "Acceleration", "type": "quantitative"}
+                }
+              };
+						var opt = {"renderer": "canvas", "actions": false};
+						vegaEmbed("#vis-area", spec, opt);
+						</script>
+					</section>
+
+          <!-- First Part, Display -->
+
+          <section>
+            <h2>Vega Code</h2>
+            <pre><code data-trim class='js' data-line-numbers=2-3>
+            {
+              "width": 300,
+							       "height": 200,
+              "data": {
+                  "url": "https://cdn.jsdelivr.net/npm/vega-datasets@2.2.0/data/cars.json"
+                },
+                "mark": "point",
+                "encoding": {
+                  "x": {"field": "Horsepower", "type": "quantitative"},
+                  "y": {"field": "Acceleration", "type": "quantitative"}
+                }
+              };
+            </code></pre>
+            <p>The first few lines of code are just setting how big the display should be.</p>
+          </section>
+
+          <!-- Second Part, Data -->
+
+          <section>
+            <h2>Vega Code</h2>
+            <pre><code data-trim class='js' data-line-numbers=4-10>
+            {
+              "width": 300,
+							       "height": 200,
+              "data": {
+                  "url": "https://cdn.jsdelivr.net/npm/vega-datasets@2.2.0/data/cars.json"
+                },
+                "mark": "point",
+                "encoding": {
+                  "x": {"field": "Horsepower", "type": "quantitative"},
+                  "y": {"field": "Acceleration", "type": "quantitative"}
+                }
+              };
+            </code></pre>
+            <p>Next, we have the important part of Vega, the data.</p>
+          </section>
+
+          <!-- Third Part, Data: URL -->
+
+          <section>
+            <h2>Vega Code</h2>
+            <pre><code data-trim class='js' data-line-numbers=5>
+            {
+              "width": 300,
+                     "height": 200,
+              "data": {
+                  "url": "https://cdn.jsdelivr.net/npm/vega-datasets@2.2.0/data/cars.json"
+                },
+                "mark": "point",
+                "encoding": {
+                  "x": {"field": "Horsepower", "type": "quantitative"},
+                  "y": {"field": "Acceleration", "type": "quantitative"}
+                }
+              };
+            </code></pre>
+            <p>First, we use the "url" to load the data from a json hosted on github by vega</p>
+          </section>
+
+          <!-- Fourth Part, Data: Mark -->
+
+          <section>
+            <h2>Vega Code</h2>
+            <pre><code data-trim class='js' data-line-numbers=7>
+            {
+              "width": 300,
+                     "height": 200,
+              "data": {
+                  "url": "https://cdn.jsdelivr.net/npm/vega-datasets@2.2.0/data/cars.json"
+                },
+                "mark": "point",
+                "encoding": {
+                  "x": {"field": "Horsepower", "type": "quantitative"},
+                  "y": {"field": "Acceleration", "type": "quantitative"}
+                }
+              };
+            </code></pre>
+            <p>Next, we choose what plot we want to use. In this case, I use a point plot.</p>
+          </section>
+
+          <!-- Fifth Part, Data: encoding -->
+
+          <section>
+            <h2>Vega Code</h2>
+            <pre><code data-trim class='js' data-line-numbers=8-10>
+            {
+              "width": 300,
+                     "height": 200,
+              "data": {
+                  "url": "https://cdn.jsdelivr.net/npm/vega-datasets@2.2.0/data/cars.json"
+                },
+                "mark": "point",
+                "encoding": {
+                  "x": {"field": "Horsepower", "type": "quantitative"},
+                  "y": {"field": "Acceleration", "type": "quantitative"}
+                }
+              };
+            </code></pre>
+            <p>Finally, we define the axis using "encoding". We have to make sure to define the field and its type.</p>
+          </section>
+
+          <!-- Sixth Part, Conclusion -->
+
+          <section>
+            <h2>Final Remarks</h2>
+            <div id="vis-area3"></div>
+            <script type="text/javascript">
+						var spec = {
+							"width": 150,
+							"height": 100,
+              "data": {
+                  "url": "https://cdn.jsdelivr.net/npm/vega-datasets@2.2.0/data/cars.json"
+                },
+                "mark": "point",
+                "encoding": {
+                  "x": {"field": "Horsepower", "type": "quantitative"},
+                  "y": {"field": "Acceleration", "type": "quantitative"}
+                }
+              };
+						var opt = {"renderer": "canvas", "actions": false};
+						vegaEmbed("#vis-area3", spec, opt);
+						</script>
+            <p> The most important thing to note here is the inverse relationship between Horsepower and Acceleration. While an engine with more horsepower seems like it would be faster, using data, this is clearly not the case.</p>
+            <p class="fragment">Onto the next visualization!</p>
+          </section>
+
+
+				</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Vega Illustration 2-->
+
+        <section>
+					<section>
+						<h2>Second Basic Vega Illustration</h2>
+						<p>Using the "<a href="https://cdn.jsdelivr.net/npm/vega-datasets@2.2.0/data/cars.json" target="_blank" rel="noopener noreferrer">stocks.csv</a>" data, I wanted to plot a few different companies stock data</p>
+						<ul>
+							<li>x-axis: "Date"</li>
+							<li>y-axis: "Price"</li>
+              <li>color: "Company"</li>
+						</ul>
+					</section>
+
+          <!-- Embedded Vega -->
+
+					<section>
+						<h2>Embeded Vega</h2>
+						<div id="vis-area2"></div>
+						<script type="text/javascript">
+						var spec = {
+              "width": 600,
+              "height": 400,
+              "data": {
+                "url": "https://vega.github.io/vega-datasets/data/stocks.csv"
+              },
+              "mark": {"type": "line"},
+              "encoding": {
+                "x": {"field": "date",
+                      "type": "temporal"
+                },
+                "y": {"field": "price", "type": "quantitative"},
+                "color": {"field": "symbol", "type": "nominal"}
+              }
+            };
+						var opt = {"renderer": "canvas", "actions": false};
+						vegaEmbed("#vis-area2", spec, opt);
+						</script>
+					</section>
+
+          <!-- First Part, Display -->
+
+          <section>
+            <h2>Vega Code</h2>
+            <pre><code data-trim class='js' data-line-numbers=2-3>
+            {
+              "width": 300,
+              "height": 200,
+              "data": {
+                "url": "https://vega.github.io/vega-datasets/data/stocks.csv"
+              },
+              "mark": {"type": "line"},
+              "encoding": {
+                "x": {"field": "date",
+                      "type": "temporal"
+                },
+                "y": {"field": "price", "type": "quantitative"},
+                "color": {"field": "symbol", "type": "nominal"}
+                }
+              };
+            </code></pre>
+            <p>Same Format as before, in these lines we are just defining the space our vega visualization goes in.</p>
+          </section>
+
+          <!-- New Url -->
+
+          <section>
+            <h2>Vega Code</h2>
+            <pre><code data-trim class='js' data-line-numbers=4-5>
+            {
+              "width": 300,
+              "height": 200,
+              "data": {
+                "url": "https://vega.github.io/vega-datasets/data/stocks.csv"
+              },
+              "mark": {"type": "line"},
+              "encoding": {
+                "x": {"field": "date",
+                      "type": "temporal"
+                },
+                "y": {"field": "price", "type": "quantitative"},
+                "color": {"field": "symbol", "type": "nominal"}
+                }
+              };
+            </code></pre>
+            <p>All I changed in this section was change the URL.</p>
+          </section>
+
+          <!-- Same Mark -->
+
+          <section>
+            <h2>Vega Code</h2>
+            <pre><code data-trim class='js' data-line-numbers=7>
+            {
+              "width": 300,
+              "height": 200,
+              "data": {
+                "url": "https://vega.github.io/vega-datasets/data/stocks.csv"
+              },
+              "mark": {"type": "line"},
+              "encoding": {
+                "x": {"field": "date",
+                      "type": "temporal"
+                },
+                "y": {"field": "price", "type": "quantitative"},
+                "color": {"field": "symbol", "type": "nominal"}
+                }
+              };
+            </code></pre>
+            <p>Once again, I decided to use a line graph, as seen in "mark".</p>
+          </section>
+
+          <section>
+            <h2>Vega Code</h2>
+            <pre><code data-trim class='js' data-line-numbers=8-10|8,12-13>
+            {
+              "width": 300,
+              "height": 200,
+              "data": {
+                "url": "https://vega.github.io/vega-datasets/data/stocks.csv"
+              },
+              "mark": {"type": "line"},
+              "encoding": {
+                "x": {"field": "date",
+                      "type": "temporal"
+                },
+                "y": {"field": "price", "type": "quantitative"},
+                "color": {"field": "symbol", "type": "nominal"}
+                }
+              };
+            </code></pre>
+            <p>Because it was a new graph, I needed to encode new x and y values!</p>
+          </section>
+
+          <section>
+            <h2>Vega Code</h2>
+            <pre><code data-trim class='js' data-line-numbers=13>
+            {
+              "width": 300,
+              "height": 200,
+              "data": {
+                "url": "https://vega.github.io/vega-datasets/data/stocks.csv"
+              },
+              "mark": {"type": "line"},
+              "encoding": {
+                "x": {"field": "date",
+                      "type": "temporal"
+                },
+                "y": {"field": "price", "type": "quantitative"},
+                "color": {"field": "symbol", "type": "nominal"}
+                }
+              };
+            </code></pre>
+            <p>In addition to this, I added "color" to seperate the companies more clearly. More on that in the next assignment.</p>
+          </section>
+
+          <section>
+            <h2>Final Remarks</h2>
+            <div id="vis-area4"></div>
+            <script type="text/javascript">
+            var spec = {
+              "width": 150,
+              "height": 100,
+              "data": {
+                "url": "https://vega.github.io/vega-datasets/data/stocks.csv"
+              },
+              "mark": {"type": "line"},
+              "encoding": {
+                "x": {"field": "date",
+                      "type": "temporal"
+                },
+                "y": {"field": "price", "type": "quantitative"},
+                "color": {"field": "symbol", "type": "nominal"}
+              }
+            };
+            var opt = {"renderer": "canvas", "actions": false};
+            vegaEmbed("#vis-area4", spec, opt);
+            </script>
+            <p>There wasn't much to take away from this. However, it is interesting to see how volatile Google was compared to the rest of the stocks. Little did anyone know that Amazon would soon dominate every other company 0-0</p>
+            <p class="fragment"><a href="https://cdn.jsdelivr.net/npm/vega-datasets@2.2.0/data/cars.json" target="_blank" rel="noopener noreferrer">Assignment 12</a>
+          </section>
+
+        </section>
+
+
+
+
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/reveal.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/plugin/highlight/highlight.min.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				slideNumber: 'h/v',
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealHighlight ]
+			});
+		</script>
+	</body>
+</html>

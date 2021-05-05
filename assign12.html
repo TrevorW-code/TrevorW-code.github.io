@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Trevor's Assignment 11</title>
+
+		<style>
+
+		.longText {
+			font-size: 0.6em;
+		}
+
+		.longerText {
+			font-size: 0.5em;
+		}
+
+		.highlight {
+			color: white;
+		}
+		</style>
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/reset.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/reveal.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/theme/moon.min.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/plugin/highlight/monokai.min.css" id="highlight-theme">
+
+		<!-- Loading Vega-->
+		<script src="https://cdn.jsdelivr.net/npm/vega@5.19.1"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vega-lite@5.0.0"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.15.1"></script>
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+        <!-- TITLE SLIDE -->
+
+      	<section>
+					<h2>Assignment 12: Integrating Interactive and MoreComplex Vega</h3>
+					<p style="color:#CFB87C; font-weight:bold;">Trevor Ward</p>
+					<p style="color:#565A5C">May 4th, 2021</p>
+				</section>
+
+        <!-- First Vega Illustration -->
+
+				<section>
+					<section>
+						<h2>First "Advanced" Vega Illustration</h2>
+						<p>Using the "<a href="https://cdn.jsdelivr.net/npm/vega-datasets@2.2.0/data/cars.json" target="_blank" rel="noopener noreferrer">cars.json</a>" data, I wanted to see how Horsepower affected Acceleration <b class="highlight">when Weight is added</b></p>
+						<ul>
+							<li>x-axis: "Horsepower"</li>
+							<li>y-axis: "Acceleration"</li>
+							<li>color: "Weight"</li>
+						</ul>
+					</section>
+
+					<!-- https://cdn.jsdelivr.net/npm/vega-datasets@2.2.0/data/cars.json-->
+
+					<section>
+						<h2>Embeded Vega</h2>
+						<div id="vis-area"></div>
+						<script type="text/javascript">
+						var spec = {
+							"width": 450,
+							"height": 450,
+							"data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@2.2.0/data/cars.json"},
+						  "params": [{
+						    "name": "mouseHover",
+						    "select": {
+						      "type": "point",
+						      "on": "mouseover"
+						    }
+						  }],
+						  "mark": {"type": "point", "tooltip": {"content": "data"}},
+						  "encoding": {
+						    "x": {"field": "Horsepower", "type": "quantitative"},
+						    "y": {"field": "Acceleration", "type": "quantitative"},
+						    "color": {
+						      "condition": {
+						        "param": "mouseHover",
+						        "field": "Weight_in_lbs", "type": "quantitative",
+						        "scale": {"scheme": "yellowgreen"}
+						      },
+						      "value": "grey"
+						    },
+						    "size": {"value": 35}
+						  }
+						};
+						var opt = {"renderer": "canvas", "actions": false};
+						vegaEmbed("#vis-area", spec, opt);
+						</script>
+						<p class="longText">(The tooltip is really offset to the right, not sure how to fix yet)</p>
+					</section>
+
+          <!-- First Part: Overview-->
+
+          <section>
+            <h2>Vega Code</h2>
+            <pre><code data-trim class='js' data-line-numbers=5-9,12,16-20,22,24>
+						{
+							"width": 500,
+							"height": 500,
+							"data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@2.2.0/data/cars.json"},
+							"params": [{
+								"name": "mouseHover",
+								"select": {
+									"type": "point",
+									"on": "mouseover"
+								}
+							}],
+							"mark": {"type": "point", "tooltip": {"content": "data"}},
+							"encoding": {
+								"x": {"field": "Horsepower", "type": "quantitative"},
+								"y": {"field": "Acceleration", "type": "quantitative"},
+								"color": {
+									"condition": {
+										"param": "mouseHover",
+										"field": "Weight_in_lbs", "type": "quantitative",
+										"scale": {"scheme": "yellowgreen"}
+									},
+									"value": "grey"
+								},
+								"size": {"value": 35}
+							}
+						};
+            </code></pre>
+            <p>Because you already know the basics, let me show you what takes this vega graph to the next level.</p>
+          </section>
+
+					<!-- 2: Parameters -->
+
+          <section>
+            <h2>Vega Code</h2>
+            <pre><code data-trim class='js' data-line-numbers=5-9>
+						{
+							"width": 500,
+							"height": 500,
+							"data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@2.2.0/data/cars.json"},
+							"params": [{
+								"name": "mouseHover",
+								"select": {
+									"type": "point",
+									"on": "mouseover"
+								}
+							}],
+							"mark": {"type": "point", "tooltip": {"content": "data"}},
+							"encoding": {
+								"x": {"field": "Horsepower", "type": "quantitative"},
+								"y": {"field": "Acceleration", "type": "quantitative"},
+								"color": {
+									"condition": {
+										"param": "mouseHover",
+										"field": "Weight_in_lbs", "type": "quantitative",
+										"scale": {"scheme": "yellowgreen"}
+									},
+									"value": "grey"
+								},
+								"size": {"value": 35}
+							}
+						};
+            </code></pre>
+            <p class="longText"> Being the "basic building block in Vega-Lite’s grammar of interaction", Parameters are used to define inputs that can later be mapped to outputs, forming the basis of Vega's <b class="highlight">Interactivity</b>.</p>
+          </section>
+
+					<!-- 2: Parameters: Naming -->
+
+					<section>
+            <h2>Vega Code</h2>
+            <pre><code data-trim class='js' data-line-numbers=5,6>
+						{
+							"width": 500,
+							"height": 500,
+							"data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@2.2.0/data/cars.json"},
+							"params": [{
+								"name": "mouseHover",
+								"select": {
+									"type": "point",
+									"on": "mouseover"
+								}
+							}],
+							"mark": {"type": "point", "tooltip": {"content": "data"}},
+							"encoding": {
+								"x": {"field": "Horsepower", "type": "quantitative"},
+								"y": {"field": "Acceleration", "type": "quantitative"},
+								"color": {
+									"condition": {
+										"param": "mouseHover",
+										"field": "Weight_in_lbs", "type": "quantitative",
+										"scale": {"scheme": "yellowgreen"}
+									},
+									"value": "grey"
+								},
+								"size": {"value": 35}
+							}
+						};
+            </code></pre>
+            <p class="longText">First, we need to name our Parameter, so let's name it "mouseHover".</p>
+          </section>
+
+					<!-- 2: Parameters: Select -->
+
+					<section>
+						<h2>Vega Code</h2>
+						<pre><code data-trim class='js' data-line-numbers=5,7,8|5,7,9>
+						{
+							"width": 500,
+							"height": 500,
+							"data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@2.2.0/data/cars.json"},
+							"params": [{
+								"name": "mouseHover",
+								"select": {
+									"type": "point",
+									"on": "mouseover"
+								}
+							}],
+							"mark": {"type": "point", "tooltip": {"content": "data"}},
+							"encoding": {
+								"x": {"field": "Horsepower", "type": "quantitative"},
+								"y": {"field": "Acceleration", "type": "quantitative"},
+								"color": {
+									"condition": {
+										"param": "mouseHover",
+										"field": "Weight_in_lbs", "type": "quantitative",
+										"scale": {"scheme": "yellowgreen"}
+									},
+									"value": "grey"
+								},
+								"size": {"value": 35}
+							}
+						};
+						</code></pre>
+						<p class="longText">Next, we use "select" to finishing defining the input, which tells the code what data the user can select. Here, the type of thing we want to select is a point on the graph ("type": "point"), and we select it when we hover over it ("on": "mouseover").</p>
+					</section>
+
+					<!-- 3: Tooltips -->
+
+					<section>
+						<h2>Vega Code</h2>
+						<pre><code data-trim class='js' data-line-numbers=12>
+						{
+							"width": 500,
+							"height": 500,
+							"data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@2.2.0/data/cars.json"},
+							"params": [{
+								"name": "mouseHover",
+								"select": {
+									"type": "point",
+									"on": "mouseover"
+								}
+							}],
+							"mark": {"type": "point", "tooltip": {"content": "data"}},
+							"encoding": {
+								"x": {"field": "Horsepower", "type": "quantitative"},
+								"y": {"field": "Acceleration", "type": "quantitative"},
+								"color": {
+									"condition": {
+										"param": "mouseHover",
+										"field": "Weight_in_lbs", "type": "quantitative",
+										"scale": {"scheme": "yellowgreen"}
+									},
+									"value": "grey"
+								},
+								"size": {"value": 35}
+							}
+						};
+						</code></pre>
+						<p class="longText">The next thing used to make this graph interactive are tooltips. In the "mark" portion of the code, there is an additional variable being defined called "tooltips", which defines what should show up when you hover over the data. I picked "data" so it would show everything when someone hovers.</p>
+					</section>
+
+					<!-- 4: Conditions-->
+
+          <section>
+            <h2>Vega Code</h2>
+            <pre><code data-trim class='js' data-line-numbers=16-17,18|16-17,19|16-17,20|16,22>
+						{
+							"width": 500,
+							"height": 500,
+							"data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@2.2.0/data/cars.json"},
+							"params": [{
+								"name": "mouseHover",
+								"select": {
+									"type": "point",
+									"on": "mouseover"
+								}
+							}],
+							"mark": {"type": "point", "tooltip": {"content": "data"}},
+							"encoding": {
+								"x": {"field": "Horsepower", "type": "quantitative"},
+								"y": {"field": "Acceleration", "type": "quantitative"},
+								"color": {
+									"condition": {
+										"param": "mouseHover",
+										"field": "Weight_in_lbs", "type": "quantitative",
+										"scale": {"scheme": "yellowgreen"}
+									},
+									"value": "grey"
+								},
+								"size": {"value": 35}
+							}
+						};
+            </code></pre>
+            <p class="longerText">Here, I have defined a condition that controls the color of the entire graph. By using the parameter we defined earlier, we map <b class="highlight">mouseHover</b> to define the condition. When the user isn't hovering over something, the color scheme shows the weight of each car. However, when the user <i>does</i> hover over a point, it should highlight that single point in that color scheme. That being said, this visual is offset, so it may be hard to see. Line 22 just show's what happens when a point is being highlighted, all the other points turn grey.</p>
+          </section>
+
+					<!-- 5: Point Size-->
+
+					<section>
+						<h2>Vega Code</h2>
+						<pre><code data-trim class='js' data-line-numbers=24>
+						{
+							"width": 500,
+							"height": 500,
+							"data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@2.2.0/data/cars.json"},
+							"params": [{
+								"name": "mouseHover",
+								"select": {
+									"type": "point",
+									"on": "mouseover"
+								}
+							}],
+							"mark": {"type": "point", "tooltip": {"content": "data"}},
+							"encoding": {
+								"x": {"field": "Horsepower", "type": "quantitative"},
+								"y": {"field": "Acceleration", "type": "quantitative"},
+								"color": {
+									"condition": {
+										"param": "mouseHover",
+										"field": "Weight_in_lbs", "type": "quantitative",
+										"scale": {"scheme": "yellowgreen"}
+									},
+									"value": "grey"
+								},
+								"size": {"value": 35}
+							}
+						};
+						</code></pre>
+						<p>This one is easy. "size" just refers to the size of each point in the visual.</p>
+					</section>
+
+          <section>
+            <h2>Final Remarks</h2>
+            <div id="vis-area3"></div>
+            <script type="text/javascript">
+						var spec = {
+							"width": 200,
+							"height": 200,
+							"data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@2.2.0/data/cars.json"},
+						  "params": [{
+						    "name": "mouseHover",
+						    "select": {
+						      "type": "point",
+						      "on": "mouseover"
+						    }
+						  }],
+						  "mark": {"type": "point", "tooltip": {"content": "data"}},
+						  "encoding": {
+						    "x": {"field": "Horsepower", "type": "quantitative"},
+						    "y": {"field": "Acceleration", "type": "quantitative"},
+						    "color": {
+						      "condition": {
+						        "param": "mouseHover",
+						        "field": "Weight_in_lbs", "type": "quantitative",
+						        "scale": {"scheme": "yellowgreen"}
+						      },
+						      "value": "grey"
+						    },
+						    "size": {"value": 35}
+						  }
+						};
+						var opt = {"renderer": "canvas", "actions": false};
+						vegaEmbed("#vis-area3", spec, opt);
+						</script>
+            <p class="longText">When explored earlier, the inverse relationship between Horsepower and Acceleration seemed counterintuitive. However, now that Weight is added into the mix, we can see clearly that <b class="highlight">Cars with more horsepower are often heavier!</b> This better explains the relationship between these variables that was so confusing. The additional variable revealed that Acceleration and Horsepower are related through Correlation, not Causation.</p>
+            <p class="fragment">Onto the next visualization!</p>
+          </section>
+
+
+				</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Vega Illustration 2-->
+
+        <section>
+					<section>
+						<h2>Second "Advanced" Vega Illustration</h2>
+						<p>Using the "<a href="https://cdn.jsdelivr.net/npm/vega-datasets@2.2.0/data/cars.json" target="_blank" rel="noopener noreferrer">stocks.csv</a>" data, I wanted to plot a few different companies stock data <b class="highlight">with a way to tell what month it was</b></p>
+						<ul>
+							<li>x-axis: "Date"</li>
+							<li>y-axis: "Price"</li>
+              <li>color: "Company"</li>
+						</ul>
+					</section>
+
+          <!-- Embedded Vega -->
+
+					<section>
+						<h2>Embeded Vega</h2>
+						<div id="vis-area2"></div>
+						<script type="text/javascript">
+						var spec = {
+						  "width": 600,
+						  "height": 300,
+						  "data": {"url": "https://raw.githubusercontent.com/vega/vega/master/docs/data/stocks.csv"},
+						  "transform": [{"filter": "datum.symbol!=='IBM'"}],
+						  "encoding": {"x": {"field": "date", "type": "temporal","title": "date"}},
+						  "layer": [
+
+						    {
+						      "mark": "line",
+						      "encoding": {
+						        "y": {"field": "price", "type": "quantitative", "title": "price"},
+						        "color": {"field": "symbol", "type": "nominal", "legend": null}
+						      }
+						    },
+
+						{
+						    "encoding": {
+						      "x": {"aggregate": "max", "field": "date", "type": "temporal"},
+						      "y": {"aggregate": {"argmax": "date"}, "field": "price", "type": "quantitative"}
+						    },
+						    "layer": [{
+						      "mark": {"type": "text", "align": "left", "dx": 4},
+						      "encoding": {
+						        "color": {"field": "symbol", "type": "nominal", "legend": null},
+						        "text": {
+						          "field":"symbol", "type": "nominal"}}
+						    }]
+						  },
+
+						    {
+						      "params": [
+						        {
+						          "name": "index",
+						          "select": {
+						            "type": "point",
+						            "encodings": ["x"],
+						            "on": "mousemove",
+						            "nearest": true
+						          }
+						        }
+						      ],
+						      "mark": {"type": "point"},
+						      "encoding": {
+						        "y": {"field": "price", "type": "quantitative"},
+						        "opacity": {"value": 0}
+						      }
+						    },
+						    {
+						      "transform": [{"filter": {"and": ["index.date", {"param": "index"}]}}],
+						      "mark": "rule"
+						    },
+						    {
+						      "transform": [{"filter": {"and": ["index.date", {"param": "index"}]}}],
+						      "mark": "text",
+						      "encoding": {
+						        "y": {"value": 10},
+						        "text": {"field": "date", "type": "temporal"}
+						      }
+						    }
+						  ],
+						  "config": {"text": {"align": "right", "dx": -5, "dy": 5}}
+						};
+						var opt = {"renderer": "canvas", "actions": false};
+						vegaEmbed("#vis-area2", spec, opt);
+						</script>
+						<p class="longText">(Once again, that same offset)</p>
+					</section>
+
+          <!-- First Part: Overview-->
+
+          <section>
+            <h2>Vega Code</h2>
+            <pre><code data-trim class='js' data-line-numbers=5,7,13,19-20,22,25,32,37,39,46,50,51,54,62>
+							{
+								"width": 600,
+								"height": 300,
+								"data": {"url": "https://raw.githubusercontent.com/vega/vega/master/docs/data/stocks.csv"},
+								"transform": [{"filter": "datum.symbol!=='IBM'"}],
+								"encoding": {"x": {"field": "date", "type": "temporal","title": "date"}},
+								"layer": [
+
+									{
+										"mark": "line",
+										"encoding": {
+											"y": {"field": "price", "type": "quantitative", "title": "price"},
+											"color": {"field": "symbol", "type": "nominal", "legend": null}
+										}
+									},
+
+							{
+									"encoding": {
+										"x": {"aggregate": "max", "field": "date", "type": "temporal"},
+										"y": {"aggregate": {"argmax": "date"}, "field": "price", "type": "quantitative"}
+									},
+									"layer": [{
+										"mark": {"type": "text", "align": "left", "dx": 4},
+										"encoding": {
+											"color": {"field": "symbol", "type": "nominal", "legend": null},
+											"text": {
+												"field":"symbol", "type": "nominal"}}
+									}]
+								},
+
+									{
+										"params": [
+											{
+												"name": "index",
+												"select": {
+													"type": "point",
+													"encodings": ["x"],
+													"on": "mousemove",
+													"nearest": true
+												}
+											}
+										],
+										"mark": {"type": "point"},
+										"encoding": {
+											"y": {"field": "price", "type": "quantitative"},
+											"opacity": {"value": 0}
+										}
+									},
+									{
+										"transform": [{"filter": {"and": ["index.date", {"param": "index"}]}}],
+										"mark": "rule"
+									},
+									{
+										"transform": [{"filter": {"and": ["index.date", {"param": "index"}]}}],
+										"mark": "text",
+										"encoding": {
+											"y": {"value": 10},
+											"text": {"field": "date", "type": "temporal"}
+										}
+									}
+								],
+								"config": {"text": {"align": "right", "dx": -5, "dy": 5}}
+							};
+            </code></pre>
+            <p>This code was a lot more ragtag than the last, so I'll explain the new stuff the best I can.</p>
+          </section>
+
+          <!-- Transform -->
+
+					<section>
+						<h2>Vega Code</h2>
+						<pre><code data-trim class='js' data-line-numbers=5,50,54>
+							{
+								"width": 600,
+								"height": 300,
+								"data": {"url": "https://raw.githubusercontent.com/vega/vega/master/docs/data/stocks.csv"},
+								"transform": [{"filter": "datum.symbol!=='IBM'"}],
+								"encoding": {"x": {"field": "date", "type": "temporal","title": "date"}},
+								"layer": [
+
+									{
+										"mark": "line",
+										"encoding": {
+											"y": {"field": "price", "type": "quantitative", "title": "price"},
+											"color": {"field": "symbol", "type": "nominal", "legend": null}
+										}
+									},
+
+							{
+									"encoding": {
+										"x": {"aggregate": "max", "field": "date", "type": "temporal"},
+										"y": {"aggregate": {"argmax": "date"}, "field": "price", "type": "quantitative"}
+									},
+									"layer": [{
+										"mark": {"type": "text", "align": "left", "dx": 4},
+										"encoding": {
+											"color": {"field": "symbol", "type": "nominal", "legend": null},
+											"text": {
+												"field":"symbol", "type": "nominal"}}
+									}]
+								},
+
+									{
+										"params": [
+											{
+												"name": "index",
+												"select": {
+													"type": "point",
+													"encodings": ["x"],
+													"on": "mousemove",
+													"nearest": true
+												}
+											}
+										],
+										"mark": {"type": "point"},
+										"encoding": {
+											"y": {"field": "price", "type": "quantitative"},
+											"opacity": {"value": 0}
+										}
+									},
+									{
+										"transform": [{"filter": {"and": ["index.date", {"param": "index"}]}}],
+										"mark": "rule"
+									},
+									{
+										"transform": [{"filter": {"and": ["index.date", {"param": "index"}]}}],
+										"mark": "text",
+										"encoding": {
+											"y": {"value": 10},
+											"text": {"field": "date", "type": "temporal"}
+										}
+									}
+								],
+								"config": {"text": {"align": "right", "dx": -5, "dy": 5}}
+							};
+						</code></pre>
+						<p class="longText">Transformations are essentially different ways to filter data. Here, I use it to delete a column of data (line 5), and perform a filter that links up to a "rule" mark, showing the date the mouse cursor is on.</p>
+					</section>
+
+					<!-- 2 -->
+
+					<section>
+						<h2>Vega Code</h2>
+						<pre><code data-trim class='js' data-line-numbers=7,22>
+							{
+								"width": 600,
+								"height": 300,
+								"data": {"url": "https://raw.githubusercontent.com/vega/vega/master/docs/data/stocks.csv"},
+								"transform": [{"filter": "datum.symbol!=='IBM'"}],
+								"encoding": {"x": {"field": "date", "type": "temporal","title": "date"}},
+								"layer": [
+
+									{
+										"mark": "line",
+										"encoding": {
+											"y": {"field": "price", "type": "quantitative", "title": "price"},
+											"color": {"field": "symbol", "type": "nominal", "legend": null}
+										}
+									},
+
+							{
+									"encoding": {
+										"x": {"aggregate": "max", "field": "date", "type": "temporal"},
+										"y": {"aggregate": {"argmax": "date"}, "field": "price", "type": "quantitative"}
+									},
+									"layer": [{
+										"mark": {"type": "text", "align": "left", "dx": 4},
+										"encoding": {
+											"color": {"field": "symbol", "type": "nominal", "legend": null},
+											"text": {
+												"field":"symbol", "type": "nominal"}}
+									}]
+								},
+
+									{
+										"params": [
+											{
+												"name": "index",
+												"select": {
+													"type": "point",
+													"encodings": ["x"],
+													"on": "mousemove",
+													"nearest": true
+												}
+											}
+										],
+										"mark": {"type": "point"},
+										"encoding": {
+											"y": {"field": "price", "type": "quantitative"},
+											"opacity": {"value": 0}
+										}
+									},
+									{
+										"transform": [{"filter": {"and": ["index.date", {"param": "index"}]}}],
+										"mark": "rule"
+									},
+									{
+										"transform": [{"filter": {"and": ["index.date", {"param": "index"}]}}],
+										"mark": "text",
+										"encoding": {
+											"y": {"value": 10},
+											"text": {"field": "date", "type": "temporal"}
+										}
+									}
+								],
+								"config": {"text": {"align": "right", "dx": -5, "dy": 5}}
+							};
+						</code></pre>
+						<p class="longText">The next part of the code, called a "layer", is used to layer different plots on one another. Because of the interactivity of the graph (the black "rule" showing the date), the only way to accomplish it was to layer on both "marks". It also shows the text of the Rule (displaying the date) and of the Lines (Each company name is next to each line).</p>
+					</section>
+
+					<!-- 3 -->
+
+					<section>
+						<h2>Vega Code</h2>
+						<pre><code data-trim class='js' data-line-numbers=13,25>
+							{
+								"width": 600,
+								"height": 300,
+								"data": {"url": "https://raw.githubusercontent.com/vega/vega/master/docs/data/stocks.csv"},
+								"transform": [{"filter": "datum.symbol!=='IBM'"}],
+								"encoding": {"x": {"field": "date", "type": "temporal","title": "date"}},
+								"layer": [
+
+									{
+										"mark": "line",
+										"encoding": {
+											"y": {"field": "price", "type": "quantitative", "title": "price"},
+											"color": {"field": "symbol", "type": "nominal", "legend": null}
+										}
+									},
+
+							{
+									"encoding": {
+										"x": {"aggregate": "max", "field": "date", "type": "temporal"},
+										"y": {"aggregate": {"argmax": "date"}, "field": "price", "type": "quantitative"}
+									},
+									"layer": [{
+										"mark": {"type": "text", "align": "left", "dx": 4},
+										"encoding": {
+											"color": {"field": "symbol", "type": "nominal", "legend": null},
+											"text": {
+												"field":"symbol", "type": "nominal"}}
+									}]
+								},
+
+									{
+										"params": [
+											{
+												"name": "index",
+												"select": {
+													"type": "point",
+													"encodings": ["x"],
+													"on": "mousemove",
+													"nearest": true
+												}
+											}
+										],
+										"mark": {"type": "point"},
+										"encoding": {
+											"y": {"field": "price", "type": "quantitative"},
+											"opacity": {"value": 0}
+										}
+									},
+									{
+										"transform": [{"filter": {"and": ["index.date", {"param": "index"}]}}],
+										"mark": "rule"
+									},
+									{
+										"transform": [{"filter": {"and": ["index.date", {"param": "index"}]}}],
+										"mark": "text",
+										"encoding": {
+											"y": {"value": 10},
+											"text": {"field": "date", "type": "temporal"}
+										}
+									}
+								],
+								"config": {"text": {"align": "right", "dx": -5, "dy": 5}}
+							};
+						</code></pre>
+						<p class="longText">The only new thing here was the added "legend":null. I included this so I could add the names of each company next to the end of the lines without interference from an actual legend.</p>
+					</section>
+
+					<!-- 4 -->
+
+					<section>
+						<h2>Vega Code</h2>
+						<pre><code data-trim class='js' data-line-numbers=19,20>
+							{
+								"width": 600,
+								"height": 300,
+								"data": {"url": "https://raw.githubusercontent.com/vega/vega/master/docs/data/stocks.csv"},
+								"transform": [{"filter": "datum.symbol!=='IBM'"}],
+								"encoding": {"x": {"field": "date", "type": "temporal","title": "date"}},
+								"layer": [
+
+									{
+										"mark": "line",
+										"encoding": {
+											"y": {"field": "price", "type": "quantitative", "title": "price"},
+											"color": {"field": "symbol", "type": "nominal", "legend": null}
+										}
+									},
+
+							{
+									"encoding": {
+										"x": {"aggregate": "max", "field": "date", "type": "temporal"},
+										"y": {"aggregate": {"argmax": "date"}, "field": "price", "type": "quantitative"}
+									},
+									"layer": [{
+										"mark": {"type": "text", "align": "left", "dx": 4},
+										"encoding": {
+											"color": {"field": "symbol", "type": "nominal", "legend": null},
+											"text": {
+												"field":"symbol", "type": "nominal"}}
+									}]
+								},
+
+									{
+										"params": [
+											{
+												"name": "index",
+												"select": {
+													"type": "point",
+													"encodings": ["x"],
+													"on": "mousemove",
+													"nearest": true
+												}
+											}
+										],
+										"mark": {"type": "point"},
+										"encoding": {
+											"y": {"field": "price", "type": "quantitative"},
+											"opacity": {"value": 0}
+										}
+									},
+									{
+										"transform": [{"filter": {"and": ["index.date", {"param": "index"}]}}],
+										"mark": "rule"
+									},
+									{
+										"transform": [{"filter": {"and": ["index.date", {"param": "index"}]}}],
+										"mark": "text",
+										"encoding": {
+											"y": {"value": 10},
+											"text": {"field": "date", "type": "temporal"}
+										}
+									}
+								],
+								"config": {"text": {"align": "right", "dx": -5, "dy": 5}}
+							};
+						</code></pre>
+						<p class="longText">The aggregate part of this text essentially calculates the end of the data for the date, which is used to place the text illustrating each individual company.</p>
+					</section>
+
+					<!-- 5 -->
+
+					<section>
+						<h2>Vega Code</h2>
+						<pre><code data-trim class='js' data-line-numbers=32,37,39>
+							{
+								"width": 600,
+								"height": 300,
+								"data": {"url": "https://raw.githubusercontent.com/vega/vega/master/docs/data/stocks.csv"},
+								"transform": [{"filter": "datum.symbol!=='IBM'"}],
+								"encoding": {"x": {"field": "date", "type": "temporal","title": "date"}},
+								"layer": [
+
+									{
+										"mark": "line",
+										"encoding": {
+											"y": {"field": "price", "type": "quantitative", "title": "price"},
+											"color": {"field": "symbol", "type": "nominal", "legend": null}
+										}
+									},
+
+							{
+									"encoding": {
+										"x": {"aggregate": "max", "field": "date", "type": "temporal"},
+										"y": {"aggregate": {"argmax": "date"}, "field": "price", "type": "quantitative"}
+									},
+									"layer": [{
+										"mark": {"type": "text", "align": "left", "dx": 4},
+										"encoding": {
+											"color": {"field": "symbol", "type": "nominal", "legend": null},
+											"text": {
+												"field":"symbol", "type": "nominal"}}
+									}]
+								},
+
+									{
+										"params": [
+											{
+												"name": "index",
+												"select": {
+													"type": "point",
+													"encodings": ["x"],
+													"on": "mousemove",
+													"nearest": true
+												}
+											}
+										],
+										"mark": {"type": "point"},
+										"encoding": {
+											"y": {"field": "price", "type": "quantitative"},
+											"opacity": {"value": 0}
+										}
+									},
+									{
+										"transform": [{"filter": {"and": ["index.date", {"param": "index"}]}}],
+										"mark": "rule"
+									},
+									{
+										"transform": [{"filter": {"and": ["index.date", {"param": "index"}]}}],
+										"mark": "text",
+										"encoding": {
+											"y": {"value": 10},
+											"text": {"field": "date", "type": "temporal"}
+										}
+									}
+								],
+								"config": {"text": {"align": "right", "dx": -5, "dy": 5}}
+							};
+						</code></pre>
+						<p class="longText">The main thing here was the "encodings": ["x"] and the "nearest": true. I believe that the ["x"] encoding essentially means that the data being selected is only on the x axis, not the y. In addition, "nearest": refers to selecting the nearest value to the cursor, which in this case, I selected as true. Each of the dates are only for the first day of every month, so this prevents any deadspace in the "rule" mark.</p>
+					</section>
+
+					<!-- 6 -->
+
+					<section>
+						<h2>Vega Code</h2>
+						<pre><code data-trim class='js' data-line-numbers=46,51,62>
+							{
+								"width": 600,
+								"height": 300,
+								"data": {"url": "https://raw.githubusercontent.com/vega/vega/master/docs/data/stocks.csv"},
+								"transform": [{"filter": "datum.symbol!=='IBM'"}],
+								"encoding": {"x": {"field": "date", "type": "temporal","title": "date"}},
+								"layer": [
+
+									{
+										"mark": "line",
+										"encoding": {
+											"y": {"field": "price", "type": "quantitative", "title": "price"},
+											"color": {"field": "symbol", "type": "nominal", "legend": null}
+										}
+									},
+
+							{
+									"encoding": {
+										"x": {"aggregate": "max", "field": "date", "type": "temporal"},
+										"y": {"aggregate": {"argmax": "date"}, "field": "price", "type": "quantitative"}
+									},
+									"layer": [{
+										"mark": {"type": "text", "align": "left", "dx": 4},
+										"encoding": {
+											"color": {"field": "symbol", "type": "nominal", "legend": null},
+											"text": {
+												"field":"symbol", "type": "nominal"}}
+									}]
+								},
+
+									{
+										"params": [
+											{
+												"name": "index",
+												"select": {
+													"type": "point",
+													"encodings": ["x"],
+													"on": "mousemove",
+													"nearest": true
+												}
+											}
+										],
+										"mark": {"type": "point"},
+										"encoding": {
+											"y": {"field": "price", "type": "quantitative"},
+											"opacity": {"value": 0}
+										}
+									},
+									{
+										"transform": [{"filter": {"and": ["index.date", {"param": "index"}]}}],
+										"mark": "rule"
+									},
+									{
+										"transform": [{"filter": {"and": ["index.date", {"param": "index"}]}}],
+										"mark": "text",
+										"encoding": {
+											"y": {"value": 10},
+											"text": {"field": "date", "type": "temporal"}
+										}
+									}
+								],
+								"config": {"text": {"align": "right", "dx": -5, "dy": 5}}
+							};
+						</code></pre>
+						<p class="longText">Now there are only 3 lines left. The opacity refers to the opacity of the points on the line graph. Usually you are able to see little circles, but because the opacity is set to 1, you can't see them. In addition, here we see the "rule" mark. It is essentially the black line that stretches across the screen, highlighting where you are in the linegraph. Finally, we have the last line, which just configures the text. It doesn't really effect the graph all that much.</p>
+					</section>
+
+					<section>
+						<h2>Embeded Vega</h2>
+						<div id="vis-area4"></div>
+						<script type="text/javascript">
+						var spec = {
+							"width": 300,
+							"height": 100,
+							"data": {"url": "https://raw.githubusercontent.com/vega/vega/master/docs/data/stocks.csv"},
+							"transform": [{"filter": "datum.symbol!=='IBM'"}],
+							"encoding": {"x": {"field": "date", "type": "temporal","title": "date"}},
+							"layer": [
+
+								{
+									"mark": "line",
+									"encoding": {
+										"y": {"field": "price", "type": "quantitative", "title": "price"},
+										"color": {"field": "symbol", "type": "nominal", "legend": null}
+									}
+								},
+
+						{
+								"encoding": {
+									"x": {"aggregate": "max", "field": "date", "type": "temporal"},
+									"y": {"aggregate": {"argmax": "date"}, "field": "price", "type": "quantitative"}
+								},
+								"layer": [{
+									"mark": {"type": "text", "align": "left", "dx": 4},
+									"encoding": {
+										"color": {"field": "symbol", "type": "nominal", "legend": null},
+										"text": {
+											"field":"symbol", "type": "nominal"}}
+								}]
+							},
+
+								{
+									"params": [
+										{
+											"name": "index",
+											"select": {
+												"type": "point",
+												"encodings": ["x"],
+												"on": "mousemove",
+												"nearest": true
+											}
+										}
+									],
+									"mark": {"type": "point"},
+									"encoding": {
+										"y": {"field": "price", "type": "quantitative"},
+										"opacity": {"value": 0}
+									}
+								},
+								{
+									"transform": [{"filter": {"and": ["index.date", {"param": "index"}]}}],
+									"mark": "rule"
+								},
+								{
+									"transform": [{"filter": {"and": ["index.date", {"param": "index"}]}}],
+									"mark": "text",
+									"encoding": {
+										"y": {"value": 10},
+										"text": {"field": "date", "type": "temporal"}
+									}
+								}
+							],
+							"config": {"text": {"align": "right", "dx": -5, "dy": 5}}
+						};
+						var opt = {"renderer": "canvas", "actions": false};
+						vegaEmbed("#vis-area4", spec, opt);
+						</script>
+						<p class="longText">From these additions, there wasn't much more of a takeaway. Rather, I focused on making the graph as readable and user-friendly as possible, and that allows people to understand it more.</p>
+						<p class="fragment">Thanks for such a great semester!</p>
+					</section>
+
+        </section>
+
+
+
+
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/reveal.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/plugin/highlight/highlight.min.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				slideNumber: 'h/v',
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealHighlight ]
+			});
+		</script>
+	</body>
+</html>
