@@ -1,241 +1,46 @@
-
-
-<!DOCTYPE html>
 <html lang="en">
-<style>
+  <head>
+    <title>Home • Trevor Ward</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 
-/* water animation */
-
-@keyframes animateWave {
-  0% {
-    transform: scale(1,0);
-  }
-  50% {
-    transform: scale(1,1);
-  }
-  100% {
-    transform: scale(1,0);
-  }
-}
-
-/* Simple Formating */
-
-html {
-  box-sizing: border-box;
-}
-
-*,*::before,*::after {
-  box-sizing: inherit;
-}
-
-/* background and general formatting */
-
-body {
-  margin: 0;
-  background-color: #eccca2;
-}
-
-/* SVG STUFF */
-
-p.excerpt {
-  text-align: center;
-  left: 39%;
-  color: white;
-  font-size: 25px;
-}
-
-.wave-container {
-  opacity: 1;
-}
-
-li {
-  color: white;
-}
-
-.wave-container > svg {
-  display: block;
-  transform-origin: top;
-  animation: animateWave 8000ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
-  animation-iteration-count: infinite;
-}
-
-/* Header */
-
-#myHeader {
-  left: 31%;
-  top: 100px;
-  position: fixed;
-  text-align: center;
-  color:#ffffff;
-  font-size: 100px;
-}
-
-/* Links to other websites */
-
-div.linkbar {
-  position: fixed;
-  width: 80px;
-  height: 320px;
-  top: 0px;
-}
-
-div.linkbox {
-  background-color: white;
-  cursor: pointer;
-  height: 80px;
-  width: 80px;
-  border: 3px outset gray;
-}
-
-/*
-
-These are all images I may use as Icons eventually
+  </head>
+  <body>
 
 
-div.linkbox.1 {
-  background-image: url("h0me.png");
-}
 
-div.linkbox.2 {
-  background-image: url("about.png");
-}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Trevor Ward</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="https://trevorw-code.github.io/homepage">Home<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://trevorw-code.github.io/about_me">Resume</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://trevorw-code.github.io/portfolio_">Portfolio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://trevorw-code.github.io/contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
-div.linkbox.3 {
-  background-image: url("port.png");
-}
 
-div.linkbox.4 {
-  background-image: url("contact.png");
-}
-
-*/
-
-div.textlink {
-  text-align: center;
-}
-
-div.linkbox:hover {
-  background-color: lightgray;
-}
-
-div.experienceFrame {
-  display: inline-block;
-  width: 93.5%;
-  margin-top: 50px;
-  margin-bottom: 50px;
-  margin-right: 50px;
-  margin-left: 50px;
-  bottom: 425px;
-  height: 425px;
-  background-color: #e7c496;
-}
-
-div.experienceBox {
-  text-align:center;
-  display: inline-block;
-  background-color: #e1bf92;
-  width: 25%;
-  margin-top: 50px;
-  margin-bottom: 50px;
-  margin-right: 50px;
-  margin-left: 50px;
-}
-
-</style>
-
-<head>
-  <meta name="description" content="Webpage description goes here" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HomePage</title>
-</head>
-</head>
-
-<body>
-
-  <div>
-    <div class="wave-container">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-        <path fill="#f3f4f5" fill-opacity="1" d="M0,128L48,133.3C96,139,192,149,288,144C384,139,480,117,576,117.3C672,117,768,139,864,133.3C960,128,1056,96,1152,74.7C1248,53,1344,43,1392,37.3L1440,32L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
-      </svg>
+    <div class="bg-light">
+      <img class="img-rounded" src="resumePic.png">
     </div>
 
-    <div class="linkbar">
-        <div class = "linkbox" onclick="myFunction1()">
-          <p>Home</p>
-        </div>
-        <div class = "linkbox" onclick="myFunction2()">
-          <p>About</p>
-        </div>
-        <div class = "linkbox" onclick="myFunction3()">
-          <p>Portfolio</p>
-        </div>
-        <div class = "linkbox" onclick="myFunction4()">
-          <p>Contact</p>
-        </div>
-      </div>
-    </div>
-
-<p>(Not experience relevant to coding, but just a template for when I do. These are the jobs I've worked.)
-    <div class="experienceFrame">
-      <div class="experienceBox">
-
-        <p class="excerpt">Barista, Host</p>
-        <ul>
-          <li>Hermosa Beach, California
-          <li>Martha’s Grill 22nd Street/ Apr 2017 to Current
-          <li>Made all of the drinks for the restaurant including coffee beverages, smoothies and shakes
-          <li>Communicated with other employees about patron placement and orders
-        <ul>
-
-      </div>
-
-      <div class="experienceBox">
-
-        <p class="excerpt">Cash Register</p>
-        <ul>
-          <li>Boulder, Colorado
-          <li>Kittredge Market/ Feb 2020 to March 2020
-          <li>Operated a Cash Register
-          <li>Took Inventory
-          <li>Prepared Food
-        <ul>
-
-      </div>
-
-      <div class="experienceBox">
-
-        <p class="excerpt">Cleaning Crew</p>
-        <ul>
-          <li>Manhattan Beach, California
-          <li>Vons/ Apr 2020 to July 2020
-          <li>Trained to Sanitize due to COVID-19
-          <li>Courtesy Clerk, helped bag groceries
-          <li>Operated the Alcohol Department
-        <ul>
-
-      </div>
-
-    </div>
-
-  <h1 id="myHeader">My Experience</h1>
 
 
-
-<script>
-function myFunction1() {
-  location.assign("https://trevorw-code.github.io/homepage")
-}
-function myFunction2() {
-  location.assign("https://trevorw-code.github.io/about_me")
-}
-function myFunction3() {
-  location.assign("https://trevorw-code.github.io/portfolio_")
-}
-function myFunction4() {
-  location.assign("https://trevorw-code.github.io/contact")
-}
-</script>
-
-</body>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
 </html>
